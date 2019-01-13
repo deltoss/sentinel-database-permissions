@@ -4,7 +4,7 @@
     "description": "A package that extends sentinel to use permissions from database tables.",
     "keywords": ["laravel", "sentinel", "auth"],
     "homepage" : "https://github.com/deltoss/sentinel-database-permissions",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "Michael Tran",
