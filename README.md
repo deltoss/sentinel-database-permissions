@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/deltoss/sentinel-database-permissions.svg?style=svg)](https://circleci.com/gh/deltoss/sentinel-database-permissions)
+
 # Table of Contents
 - [Introduction](#introduction)
 - [Requirements](#requirements)
