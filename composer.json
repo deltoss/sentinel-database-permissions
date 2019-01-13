@@ -1,0 +1,42 @@
+{
+    "version": "1.0.0",
+    "name": "deltoss/sentinel-database-permissions",
+    "description": "A package that extends sentinel to use permissions from database tables.",
+    "keywords": ["laravel", "sentinel", "auth"],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Michael Tran"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Deltoss\\SentinelDatabasePermissions\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { 
+            "Deltoss\\SentinelDatabasePermissions\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1.3",
+        "laravel/framework": "^5.5",
+        "cartalyst/sentinel": "2.0.*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Deltoss\\SentinelDatabasePermissions\\Providers\\SentinelDatabasePermissionsServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5",
+        "orchestra/testbench": "^3.7",
+        "doctrine/dbal": "^2.9"
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
