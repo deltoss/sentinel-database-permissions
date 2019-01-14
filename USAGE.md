@@ -1,16 +1,16 @@
 # Table of Contents
 - [Managing Permissions](#managing-permissions)
 - [Users](#users)
-  * [Checking for Access](#users-checking-for-access)
-  * [Get Associated Abilities](#users-get-associated-abilities)
   * [Adding Permission](#users-adding-permission)
   * [Removing Permission](#users-removing-permission)
   * [Updating Permission](#users-updating-permission)
+  * [Checking for Access](#users-checking-for-access)
+  * [Get Associated Abilities](#users-get-associated-abilities)
 - [Roles](#roles)
-  * [Get Associated Abilities](#roles-get-associated-abilities)
   * [Adding Permission](#roles-adding-permission)
   * [Removing Permission](#roles-removing-permission)
   * [Updating Permission](#roles-updating-permission)
+  * [Get Associated Abilities](#roles-get-associated-abilities)
 - [Abilities](#abilities)
   * [Listing](#abilities-listing)
   * [Creating](#abilities-creating)
@@ -28,6 +28,81 @@
 Just like with Sentinel, you can use the `addPermission`, `updatePermission`, and `removePermission` method. However, you can pass in a ability **slug**, an **ability** object, or an **ability** ID. Note that you also don't need to call the `save` method to persist the changes to the permission. For more information, see the usage examples with [users](#users) and [roles](#roles).
 
 # <a name="users"></a>Users
+
+## <a name="users-adding-permission"></a>Adding Permission
+
+Note before you use any of the below approaches to add a permission, you must already have created the ability in the database. For more information, see (creating abilities)[#abilities-creating].
+
+Code example adding permission using an ability ID:
+```php
+$user = Sentinel::findUserById(1);
+// First parameter is the ability.
+// Second parameter indicates whether
+// to allow/deny the ability.
+$user->addPermission(1, true);
+```
+
+Code example adding permission using an ability object:
+```php
+$user = Sentinel::findUserById(1);
+$ability = Sentinel::findAbilityById(1);
+$user->addPermission($ability, true);
+```
+
+Code example adding permission using an ability slug:
+```php
+$user = Sentinel::findUserById(1);
+$user->addPermission('viewroles', true);
+```
+
+## <a name="users-removing-permission"></a>Removing Permission
+
+Code example removing permission using an ability ID:
+```php
+$user = Sentinel::findUserById(1);
+$user->removePermission(1);
+```
+
+Code example removing permission using an ability object:
+```php
+$user = Sentinel::findUserById(1);
+$ability = Sentinel::findAbilityById(1);
+$user->removePermission($ability);
+```
+
+Code example removing permission using an ability slug:
+```php
+$user = Sentinel::findUserById(1);
+$user->removePermission('viewroles');
+```
+
+## <a name="users-updating-permission"></a>Updating Permission
+
+Code example updating permission using an ability ID:
+```php
+$user = Sentinel::findUserById(1);
+// First parameter is the ability.
+// Second parameter indicates whether
+// to allow/deny the ability
+// Third parameter indicates whether
+// to add the ability if it doesn't
+// exist. By default, it's false.
+$user->updatePermission(1, false, true);
+```
+
+Code example updating permission using an ability object:
+```php
+$user = Sentinel::findUserById(1);
+$ability = Sentinel::findAbilityById(1);
+$user->updatePermission($ability, false, true);
+```
+
+Code example updating permission using an ability slug:
+```php
+$user = Sentinel::findUserById(1);
+$user->updatePermission('viewroles', false, true);
+```
+
 
 ## <a name="users-checking-for-access"></a>Checking for Access
 Like Sentinel, you can use `hasAccess` and `hasAnyAccess` as below:
@@ -106,115 +181,17 @@ foreach ($abilities as $ability)
 }
 ```
 
-## <a name="users-adding-permission"></a>Adding Permission
-
-Note before you use any of the below approaches to add a permission, you must already have created the ability in the database.
-
-Code example adding permission using an ability ID:
-```php
-$user = Sentinel::findUserById(1);
-// First parameter is the ability id
-// or object.
-// Second parameter indicates whether
-// to allow/deny the ability.
-$user->addPermission(1, true);
-```
-
-Code example adding permission using an ability object:
-```php
-$user = Sentinel::findUserById(1);
-$ability = Sentinel::findAbilityById(1);
-$user->addPermission($ability, true);
-```
-
-Code example adding permission using an ability slug:
-```php
-$user = Sentinel::findUserById(1);
-$user->addPermission('viewroles', true);
-```
-
-## <a name="users-removing-permission"></a>Removing Permission
-
-Code example removing permission using an ability ID:
-```php
-$user = Sentinel::findUserById(1);
-$user->removePermission(1);
-```
-
-Code example removing permission using an ability object:
-```php
-$user = Sentinel::findUserById(1);
-$ability = Sentinel::findAbilityById(1);
-$user->removePermission($ability);
-```
-
-Code example removing permission using an ability slug:
-```php
-$user = Sentinel::findUserById(1);
-$user->removePermission('viewroles');
-```
-
-## <a name="users-updating-permission"></a>Updating Permission
-
-Code example updating permission using an ability ID:
-```php
-$user = Sentinel::findUserById(1);
-// First parameter is the ability id
-// or object.
-// Second parameter indicates whether
-// to allow/deny the ability
-// Third parameter indicates whether
-// to add the ability if it doesn't
-// exist. By default, it's false.
-$user->updatePermission(1, false, true);
-```
-
-Code example updating permission using an ability object:
-```php
-$user = Sentinel::findUserById(1);
-$ability = Sentinel::findAbilityById(1);
-$user->updatePermission($ability, false, true);
-```
-
-Code example updating permission using an ability slug:
-```php
-$user = Sentinel::findUserById(1);
-$user->updatePermission('viewroles', false, true);
-```
-
 # <a name="roles"></a>Roles
-
-## <a name="roles-get-associated-abilities"></a>Get Associated Abilities
-
-Roles, unlike users, can't have indirect permissions, and as such has fewer methods of retrieving associated abilities.
-
-| Method                  | Returns          | Description                            |
-| ----------------------- | ---------------- | -------------------------------------- |
-| getAbilities            | Collection       | Gets the assigned abilities of the role. |
-| getAllowedAbilities     | Collection       | Gets the assigned **allowed** abilities of the role. |
-| getRejectedAbilities    | Collection       | Gets the assigned **rejected** abilities of the role. |
-
-Code example:
-```php
-$role = Sentinel::findRoleById(1);
-$abilities = $role->getAbilities(); // getAbilities() returns a Laravel collection object
-foreach ($abilities as $ability)
-{
-    if ($ability->permission->allowed)
-    {
-        // ... Do something if permission is allowed
-    }
-}
-```
 
 ## <a name="roles-adding-permission"></a>Adding Permission
 
+Note before you use any of the below approaches to add a permission, you must already have created the ability in the database. For more information, see (creating abilities)[#abilities-creating].
+
 Code example adding permission using an ability ID:
 ```php
 $role = Sentinel::findRoleById(1);
 
-// First parameter is the ability id
-// or object.
+// First parameter is the ability.
 // Second parameter indicates whether
 // to allow/deny the ability
 $role->addPermission(1, true);
@@ -280,6 +257,29 @@ Code example updating permission using an ability slug:
 ```php
 $role = Sentinel::findRoleById(1);
 $role->updatePermission('viewroles', false, true);
+```
+
+## <a name="roles-get-associated-abilities"></a>Get Associated Abilities
+
+Roles, unlike users, can't have indirect permissions, and as such has fewer methods of retrieving associated abilities.
+
+| Method                  | Returns          | Description                            |
+| ----------------------- | ---------------- | -------------------------------------- |
+| getAbilities            | Collection       | Gets the assigned abilities of the role. |
+| getAllowedAbilities     | Collection       | Gets the assigned **allowed** abilities of the role. |
+| getRejectedAbilities    | Collection       | Gets the assigned **rejected** abilities of the role. |
+
+Code example:
+```php
+$role = Sentinel::findRoleById(1);
+$abilities = $role->getAbilities(); // getAbilities() returns a Laravel collection object
+foreach ($abilities as $ability)
+{
+    if ($ability->permission->allowed)
+    {
+        // ... Do something if permission is allowed
+    }
+}
 ```
 
 # <a name="abilities"></a>Abilities

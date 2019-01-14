@@ -71,7 +71,7 @@ $ composer require deltoss/sentinel-database-permissions
 $ php artisan vendor:publish --provider='Cartalyst\Sentinel\Laravel\SentinelServiceProvider'
 ```
 
-**Modify your "config/cartalyst.sentinel.php" file to be wired up to the extended models. The final config file should contain something similar to the below content**
+**Modify your `config/cartalyst.sentinel.php` file to be wired up to the extended models. The final config file should contain something similar to the below content**
 ```php
 return [
     // ...
