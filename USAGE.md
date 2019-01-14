@@ -147,14 +147,14 @@ if ($user->hasAnyAccess('viewroles', 'editroles'))
 There are various methods you can use to access the list of associated abilities.
 Here is a short list of the differences between the various methods:
 
-| Method                  | Returns          | Description                            |
-| ----------------------- | ---------------- | -------------------------------------- |
-| getAbilities            | Collection       | Gets the assigned abilities of the user. This **does not include** abilities through roles. |
-| getAllowedAbilities     | Collection       | Gets the assigned **allowed** abilities of the user. This **does not include** abilities through roles. |
-| getRejectedAbilities    | Collection       | Gets the assigned **rejected** abilities of the user. This **does not include** abilities through roles. |
-| getAllAbilities         | Collection       | Gets the assigned abilities of the user. This **includes** abilities through roles. |
-| getAllAllowedAbilities  | Collection       | Gets the assigned **allowed** abilities of the user. This **includes** abilities through roles. |
-| getAllRejectedAbilities | Collection       | Gets the assigned **rejected** abilities of the user. This **includes** abilities through roles. |
+| Method                    | Returns          | Description                            |
+| ------------------------- | ---------------- | -------------------------------------- |
+| `getAbilities`            | Collection       | Gets the assigned abilities of the user. This **does not include** abilities through roles. |
+| `getAllowedAbilities`     | Collection       | Gets the assigned **allowed** abilities of the user. This **does not include** abilities through roles. |
+| `getRejectedAbilities`    | Collection       | Gets the assigned **rejected** abilities of the user. This **does not include** abilities through roles. |
+| `getAllAbilities`         | Collection       | Gets the assigned abilities of the user. This **includes** abilities through roles. |
+| `getAllAllowedAbilities`  | Collection       | Gets the assigned **allowed** abilities of the user. This **includes** abilities through roles. |
+| `getAllRejectedAbilities` | Collection       | Gets the assigned **rejected** abilities of the user. This **includes** abilities through roles. |
 
 Code example with user loaded from database:
 ```php
@@ -263,11 +263,11 @@ $role->updatePermission('viewroles', false, true);
 
 Roles, unlike users, can't have indirect permissions, and as such has fewer methods of retrieving associated abilities.
 
-| Method                  | Returns          | Description                            |
-| ----------------------- | ---------------- | -------------------------------------- |
-| getAbilities            | Collection       | Gets the assigned abilities of the role. |
-| getAllowedAbilities     | Collection       | Gets the assigned **allowed** abilities of the role. |
-| getRejectedAbilities    | Collection       | Gets the assigned **rejected** abilities of the role. |
+| Method                 | Returns          | Description                            |
+| ---------------------- | ---------------- | -------------------------------------- |
+| `getAbilities`         | Collection       | Gets the assigned abilities of the role. |
+| `getAllowedAbilities`  | Collection       | Gets the assigned **allowed** abilities of the role. |
+| `getRejectedAbilities` | Collection       | Gets the assigned **rejected** abilities of the role. |
 
 Code example:
 ```php
