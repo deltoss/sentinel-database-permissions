@@ -161,30 +161,32 @@ class UserPermissibleTraitTest extends DatabaseTestCase
         return $abilityCategory;
     }
 
-    protected function createAbilities($abilityCategory)
+    protected function createAbilities($abilityCategory = null)
     {
+        $abilityCategoryId = $abilityCategory ? $abilityCategory->getAbilityCategoryId() : null;
+
         $createUserAbility = Sentinel::getAbilityRepository()->createModel();
         $createUserAbility->name = 'Create Users';
         $createUserAbility->slug = 'createusers';
-        $createUserAbility->ability_category_id = $abilityCategory->id;
+        $createUserAbility->ability_category_id = $abilityCategoryId;
         $createUserAbility->save();
 
         $viewUserAbility = Sentinel::getAbilityRepository()->createModel();
         $viewUserAbility->name = 'View Users';
         $viewUserAbility->slug = 'viewusers';
-        $viewUserAbility->ability_category_id = $abilityCategory->id;
+        $viewUserAbility->ability_category_id = $abilityCategoryId;
         $viewUserAbility->save();
 
         $updateUserAbility = Sentinel::getAbilityRepository()->createModel();
         $updateUserAbility->name = 'Update Users';
         $updateUserAbility->slug = 'updateusers';
-        $updateUserAbility->ability_category_id = $abilityCategory->id;
+        $updateUserAbility->ability_category_id = $abilityCategoryId;
         $updateUserAbility->save();
 
         $deleteUserAbility = Sentinel::getAbilityRepository()->createModel();
         $deleteUserAbility->name = 'Delete Users';
         $deleteUserAbility->slug = 'deleteusers';
-        $deleteUserAbility->ability_category_id = $abilityCategory->id;
+        $deleteUserAbility->ability_category_id = $abilityCategoryId;
         $deleteUserAbility->save();
 
         return [$createUserAbility, $viewUserAbility, $updateUserAbility, $deleteUserAbility];

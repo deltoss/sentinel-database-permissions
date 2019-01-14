@@ -19,7 +19,7 @@ class CreateCustomAbilitiesTable extends Migration
             $table->string('name')->unique();
             $table->timestamps();
 
-            $table->integer('ability_category_id')->unsigned();
+            $table->integer('ability_category_id')->nullable()->unsigned();
             $table->foreign('ability_category_id')->references('id')->on('ability_categories');
 
             $table->engine = 'InnoDB';
