@@ -77,7 +77,8 @@ $ php artisan migrate
 ```
 **Note**: Before running the migration command, it's a good idea to remove the default Laravel user migrations to prevent table collisions.
 
-**Type in `php artisan tinker`, and copy and paste the below code to see Sentinel Database Permissions in action:**
+**Now you can use Sentinel Database Permissions. To see it in action, type in `php artisan tinker`, and copy, paste and run the below code:**
+
 ```php
 $ability = Sentinel::getAbilityRepository()->createModel();
 $ability->name = 'View Roles';
