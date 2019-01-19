@@ -2,6 +2,7 @@
 
 namespace Deltoss\SentinelDatabasePermissions\Tests;
 
+use Cartalyst\Sentinel\Laravel\SentinelServiceProvider;
 use Deltoss\SentinelDatabasePermissions\Providers\SentinelDatabasePermissionsServiceProvider;
 use Orchestra\Testbench\TestCase;
 use Deltoss\SentinelDatabasePermissions\Users\ExtendedUser;
@@ -21,7 +22,7 @@ abstract class DatabaseTestCase extends TestCase
 {
     protected function getPackageProviders($app)
     {
-        return [SentinelDatabasePermissionsServiceProvider::class];
+        return [SentinelServiceProvider::class, SentinelDatabasePermissionsServiceProvider::class];
     }
 
     /**
@@ -59,23 +60,5 @@ abstract class DatabaseTestCase extends TestCase
             'database' => ':memory:',
             'prefix'   => '',
         ]);
-    }
-
-    protected function resolveApplicationBootstrappers($app)
-    {
-        // Configure the configs BEFORE the service
-        // provider gets bootstrapped, for the
-        // custom Sentinel service provider to
-        // register and behave correctly.
-        //
-        // We do this by overriding the method
-        // resolveApplicationBootstrappers().
-        // For more information, refer to this PR:
-        //   https://github.com/orchestral/testbench-core/pull/17
-        $app['config']->set('cartalyst.sentinel.users.model', ExtendedUser::class);
-        $app['config']->set('cartalyst.sentinel.roles.model', ExtendedRole::class);
-        $app['config']->set('cartalyst.sentinel.permissions.class', ExtendedStandardPermissions::class);
-
-        parent::resolveApplicationBootstrappers($app);
     }
 }

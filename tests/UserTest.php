@@ -22,13 +22,6 @@ class UserTest extends DatabaseTestCase
 
     public function testExtendedUserModel()
     {
-        // For this test, note we configured
-        // the user model to be the ExtendedUser
-        // instead of the default Sentinel's
-        // user model within the DatabaseTestCase
-        // class, inside the getEnvironmentSetUp()
-        // method.
-        
         $user = Sentinel::register([
             'first_name' => 'John',
             'last_name' => 'Doe',

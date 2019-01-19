@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 use Cartalyst\Sentinel\Laravel\SentinelServiceProvider;
 use Deltoss\SentinelDatabasePermissions\ExtendedSentinel;
 
+use Deltoss\SentinelDatabasePermissions\Users\ExtendedUser;
+use Deltoss\SentinelDatabasePermissions\Roles\ExtendedRole;
+use Deltoss\SentinelDatabasePermissions\Permissions\ExtendedStandardPermissions;
+use Deltoss\SentinelDatabasePermissions\Permissions\ExtendedStrictPermissions;
 use Deltoss\SentinelDatabasePermissions\Abilities\IlluminateAbilityRepository;
 use Deltoss\SentinelDatabasePermissions\AbilityCategories\IlluminateAbilityCategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +17,26 @@ use Symfony\Component\HttpFoundation\Response;
 class SentinelDatabasePermissionsServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
+     * Register the service provider.
      *
      * @return void
      */
-    public function boot()
+    public function register()
+    {   
+        $this->prepareResources();
+        $this->registerAbilities();
+        $this->registerAbilityCategories();
+        $this->extendSentinel();
+        $this->setConfigOverrides();
+        $this->setModelOverrides();
+    }
+
+    /**
+     * Prepare the package resources.
+     *
+     * @return void
+     */
+    protected function prepareResources()
     {
         // Load the configuration file, and configure them to be publishable
         if (file_exists(config_path('sentinel.database.permissions.php')))
@@ -42,22 +61,6 @@ class SentinelDatabasePermissionsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../publishable/database/migrations' => base_path('/database/vendor/sentinel-database-permissions/migrations'),
         ], 'migrations');
-    }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {   
-        // Register the Sentinel Service Provider
-        $this->app->register(SentinelServiceProvider::class);
-
-        $this->registerAbilities();
-        $this->registerAbilityCategories();
-        $this->setOverrides();
-        $this->extendSentinel();
     }
 
     /**
@@ -148,20 +151,49 @@ class SentinelDatabasePermissionsServiceProvider extends ServiceProvider
             return new IlluminateAbilityCategoryRepository($config['model']);
         });
     }
+    
+    /**
+     * Performs the necessary overrides to adjust the Sentinel config values.
+     *
+     * @return void
+     */
+    protected function setConfigOverrides()
+    {
+        $sentinelConfig = $this->app['config']->get('cartalyst.sentinel');
+        $userModel = $sentinelConfig['users']['model'];
+        if (!is_subclass_of($userModel, ExtendedUser::class))
+            $userModel = ExtendedUser::class;
+        $roleModel = $sentinelConfig['roles']['model'];
+        if (!is_subclass_of($roleModel, ExtendedRole::class))
+            $roleModel = ExtendedRole::class;
+        $permissionModel = $sentinelConfig['permissions']['class'];
+        if (!is_subclass_of($permissionModel, ExtendedStandardPermissions::class) && !is_subclass_of($permissionModel, ExtendedStrictPermissions::class))
+            $permissionModel = ExtendedStandardPermissions::class;
+        
+        config([
+            'cartalyst.sentinel.users.model' => $userModel,
+            'cartalyst.sentinel.roles.model' => $roleModel,
+            'cartalyst.sentinel.permissions.class' => $permissionModel,
+        ]);
+    }
 
     /**
      * Performs the necessary overrides to set the Sentinel and and permission models from the configs.
      *
      * @return void
      */
-    protected function setOverrides()
+    protected function setModelOverrides()
     {
         $sentinelConfig = $this->app['config']->get('cartalyst.sentinel');
         $sentinelDatabasePermissionsConfig = $this->app['config']->get('sentinel.database.permissions');
 
         $users = $sentinelConfig['users']['model'];
-
         $roles = $sentinelConfig['roles']['model'];
+        $permissions = $sentinelConfig['permissions']['class'];
+
+        if (method_exists($users, 'setPermissionsClass')) {
+            forward_static_call_array([ $users, 'setPermissionsClass' ], [ $permissions ]);
+        }
 
         $abilities = null;
         if (isset($sentinelDatabasePermissionsConfig['abilities']))
@@ -202,5 +234,22 @@ class SentinelDatabasePermissionsServiceProvider extends ServiceProvider
                 forward_static_call_array([ $abilityCategories, 'setAbilitiesModel' ], [ $abilities ]);
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected $defer = true;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function provides()
+    {
+        $originalProvides = (new SentinelServiceProvider($this->app))->provides();
+        return array_merge($originalProvides, [
+            'sentinel.abilities',
+            'sentinel.ability_categories'
+        ]);
     }
 }
