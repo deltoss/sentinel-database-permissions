@@ -1,5 +1,4 @@
 {
-    "version": "1.0.5",
     "name": "deltoss/sentinel-database-permissions",
     "description": "A laravel package that extends sentinel to use permissions from database tables.",
     "keywords": ["laravel", "sentinel", "auth"],
