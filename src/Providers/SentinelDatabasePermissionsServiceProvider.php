@@ -28,6 +28,7 @@ class SentinelDatabasePermissionsServiceProvider extends ServiceProvider
         $this->registerAbilityCategories();
         $this->extendSentinel();
         $this->setConfigOverrides();
+        $this->setSentinelOverrides();
         $this->setModelOverrides();
     }
 
@@ -178,11 +179,43 @@ class SentinelDatabasePermissionsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Performs the necessary overrides to set the Sentinel and and permission models from the configs.
+     * Set the overrides for Sentinel models.
      *
      * @return void
      */
-    protected function setModelOverrides()
+    protected function setSentinelOverrides()
+    {
+        // We do the Sentinel overrides again,
+        // as Sentinel Database Permissions
+        // automatically changes the used
+        // models conditionally.
+        $sentinelConfig = $this->app['config']->get('cartalyst.sentinel');
+        $users = $sentinelConfig['users']['model'];
+        $roles = $sentinelConfig['roles']['model'];
+        $permissions = $sentinelConfig['permissions']['class'];
+
+        if (class_exists($users)) {
+            if (method_exists($users, 'setRolesModel')) {
+                forward_static_call_array([ $users, 'setRolesModel' ], [ $roles ]);
+            }
+
+            if (method_exists($users, 'setPermissionsClass')) {
+                forward_static_call_array([ $users, 'setPermissionsClass' ], [ $permissions ]);
+            }
+        }
+
+        if (class_exists($roles) && method_exists($roles, 'setUsersModel')) {
+            forward_static_call_array([ $roles, 'setUsersModel' ], [ $users ]);
+        }
+    }
+
+    /**
+     * Performs the necessary overrides to set the
+     * Sentinel and permission models from the configs.
+     *
+     * @return void
+     */
+    protected function setPermissionOverrides()
     {
         $sentinelConfig = $this->app['config']->get('cartalyst.sentinel');
         $sentinelDatabasePermissionsConfig = $this->app['config']->get('sentinel.database.permissions');
@@ -190,10 +223,6 @@ class SentinelDatabasePermissionsServiceProvider extends ServiceProvider
         $users = $sentinelConfig['users']['model'];
         $roles = $sentinelConfig['roles']['model'];
         $permissions = $sentinelConfig['permissions']['class'];
-
-        if (method_exists($users, 'setPermissionsClass')) {
-            forward_static_call_array([ $users, 'setPermissionsClass' ], [ $permissions ]);
-        }
 
         $abilities = null;
         if (isset($sentinelDatabasePermissionsConfig['abilities']))
