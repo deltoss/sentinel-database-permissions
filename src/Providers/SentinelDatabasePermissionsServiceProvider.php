@@ -29,7 +29,7 @@ class SentinelDatabasePermissionsServiceProvider extends ServiceProvider
         $this->extendSentinel();
         $this->setConfigOverrides();
         $this->setSentinelOverrides();
-        $this->setModelOverrides();
+        $this->setPermissionOverrides();
     }
 
     /**
