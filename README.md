@@ -103,9 +103,9 @@ var_dump($user->hasAccess('viewroles'));
 
 # <a name="usage"></a>Usage
 
-For the usage documentation, refer to [this](USAGE.md) link.
+For the usage documentation, refer to [this](docs/usage.md) link.
 
-For the full API documentation, refer to [this](API.md) link.
+For the full API documentation, refer to [this](docs/api.md) link.
 
 # <a name="extending-sentinel-database-permissions"></a>Extending Sentinel Database Permissions
 
