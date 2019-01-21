@@ -48,6 +48,93 @@ Note if you a checking whether a user has a permission to do an action (i.e. abi
 **Ability categories** is just an optional grouping construct for abilities. For the process of authorisation, it's not relevant. It's there so when you display a list of permissions, e.g for a particular user, you can render them in groups.
 
 
+# Database Structure
+
+Cartalyst Sentinel has structured it as follows. Notice that the `permissions` fields are just text fields that contains JSON documents.
+
+```plantuml
+@startuml
+
+hide circle
+hide empty members
+
+entity users {
+   * id
+   --
+   * first_name
+   * last_name
+   * email
+   permissions
+}
+
+entity roles {
+   * id
+   --
+   * name
+   * slug
+   permissions
+}
+
+users }o--o{ roles
+
+@enduml
+```
+
+With Sentinel Database Permissions, we convert the `permissions` field to be database tables that links to `abilities`:
+
+```plantuml
+@startuml
+
+hide circle
+hide empty members
+
+entity users {
+   * id
+   --
+   * first_name
+   * last_name
+   * email
+}
+
+entity roles {
+   * id
+   --
+   * name
+   * slug
+}
+
+entity user_permissions {
+   * id
+   --
+   * user_id
+   * ability_id
+   * allowed
+}
+
+entity role_permissions {
+   * id
+   --
+   * role_id
+   * ability_id
+   * allowed
+}
+
+entity abilities {
+   * id
+   --
+   * name
+   * slug
+}
+
+users }o--o{ roles
+users |o--o{ user_permissions
+roles |o--o{ role_permissions
+user_permissions }o--o| abilities
+role_permissions }o--o| abilities
+
+@enduml
+```
+
 # Quick Start with New Laravel App
 **Install the package using composer**
 
