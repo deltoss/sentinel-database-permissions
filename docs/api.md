@@ -382,11 +382,13 @@ The associated abilities that the role has, regardless whether the permission wa
 
 # \Deltoss\SentinelDatabasePermissions\Abilities\EloquentAbility
 ---
+
 | Property      | Type          | Description                           |
 | ------------- | ------------- | ------------------------------------- |
 | id            | int           | The unique identifier and primary key.|
 | name          | string        | The displayed name.                   |
 | slug          | string        | A unique slug string.                 |
+
 ---
 ## getAbilityId()
 Returns the ability's primary key.
@@ -534,10 +536,12 @@ Returns all directly and indirectly (e.g. via roles) associated users that has r
 
 # \Deltoss\SentinelDatabasePermissions\AbilityCategories\EloquentAbilityCategory
 ---
+
 | Property      | Type          | Description                           |
 | ------------- | ------------- | ------------------------------------- |
 | id            | int           | The unique identifier and primary key.|
 | name          | string        | The displayed name.                   |
+
 ---
 
 ## getAbilityCategoryId()
