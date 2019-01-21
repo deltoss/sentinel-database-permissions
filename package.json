@@ -1,0 +1,18 @@
+{
+  "name": "sentinel-database-permissions",
+  "description": "A laravel package that extends sentinel to use permissions from database tables.",
+  "dependencies": {
+    "docsify-cli": "^4.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "init-docs": "docsify init ./docs",
+    "serve-docs": "docsify serve ./docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deltoss/sentinel-database-permissions.git"
+  },
+  "author": "Michael Tran",
+  "license": "MIT"
+}

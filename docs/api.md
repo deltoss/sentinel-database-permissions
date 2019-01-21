@@ -1,44 +1,9 @@
 # Notes
 The below documentation only includes additional methods introduced by the package, and does not include core methods which Sentinel already has.
 
-# Table of Contents
-- [\Deltoss\SentinelDatabasePermissions\ExtendedSentinel](#extended-sentinel)
-  * [findAbilityById($id)](#extended-sentinel-findabilitybyid)
-  * [findAbilityBySlug($slug)](#extended-sentinel-findabilitybyslug)
-  * [findAbilityByName($name)](#extended-sentinel-findabilitybyname)
-  * [findAbilityCategoryById($id)](#extended-sentinel-findabilitycategorybyid)
-  * [findAbilityCategoryByName($name)](#extended-sentinel-findabilitycategorybyname)
-  * [getAbilities()](#extended-sentinel-getabilities)
-  * [getAllAbilities()](#extended-sentinel-getallabilities)
-  * [getAllAllowedAbilities()](#extended-sentinel-getallallowedabilities)
-  * [getAllRejectedAbilities()](#extended-sentinel-getallrejectedabilities)
-- [\Deltoss\SentinelDatabasePermissions\Users\ExtendedUser](#extended-user)
-  * [abilities()](#extended-user-abilities)
-  * [getAbilities()](#extended-user-getabilities)
-  * [getAllAbilities()](#extended-user-getallabilities)
-  * [getAllAllowedAbilities()](#extended-user-getallallowedabilities)
-  * [getAllRejectedAbilities()](#extended-user-getallrejectedabilities)
-- [\Deltoss\SentinelDatabasePermissions\Roles\ExtendedRole](#extended-role)
-  * [abilities()](#extended-role-abilities)
-  * [getAbilities()](#extended-role-getabilities)
-- [\Deltoss\SentinelDatabasePermissions\Abilities\EloquentAbility](#eloquent-ability)
-  * [getAbilityId()](#eloquent-ability-getabilityid)
-  * [getAbilitySlug()](#eloquent-ability-getabilityslug)
-  * [getAbilityCategory()](#eloquent-ability-getabilitycategory)
-  * [getRoles()](#eloquent-ability-getroles)
-  * [getUsers()](#eloquent-ability-getusers)
-  * [getAllUsers()](#eloquent-ability-getallusers)
-  * [getAllAllowedUsers()](#eloquent-ability-getallallowedusers)
-  * [getAllRejectedUsers()](#eloquent-ability-getallrejectedusers)
-- [\Deltoss\SentinelDatabasePermissions\AbilityCategories\EloquentAbilityCategory](#eloquent-ability-category)
-  * [getAbilityCategoryId()](#eloquent-ability-category-getabilitycategoryid)
-  * [abilities()](#eloquent-ability-category-abilities)
-  * [getAbilities()](#eloquent-ability-category-getabilities)
+# \Deltoss\SentinelDatabasePermissions\ExtendedSentinel
 ---
-
-# <a name="extended-sentinel"></a>\Deltoss\SentinelDatabasePermissions\ExtendedSentinel
----
-## <a name="extended-sentinel-findabilitybyid"></a>findAbilityById($id)
+## findAbilityById($id)
 Returns an ability given an id.
 
 * **Type:** 
@@ -56,7 +21,7 @@ Returns an ability given an id.
   ```
 ---
 
-## <a name="extended-sentinel-findabilitybyslug"></a>findAbilityBySlug($slug)
+## findAbilityBySlug($slug)
 Returns an ability given a slug.
 
 * **Type:** 
@@ -74,7 +39,7 @@ Returns an ability given a slug.
   ```
 ---
 
-## <a name="extended-sentinel-findabilitybyname"></a>findAbilityByName($name)
+## findAbilityByName($name)
 Returns an ability given a name.
 
 * **Type:** 
@@ -92,7 +57,7 @@ Returns an ability given a name.
   ```
 ---
 
-## <a name="extended-sentinel-findabilitycategorybyid"></a>findAbilityCategoryById($id)
+## findAbilityCategoryById($id)
 Returns an ability category given an id.
 
 * **Type:** 
@@ -110,7 +75,7 @@ Returns an ability category given an id.
   ```
 ---
 
-## <a name="extended-sentinel-findabilitycategorybyname"></a>findAbilityCategoryByName($name)
+## findAbilityCategoryByName($name)
 Returns an ability given a name.
 
 * **Type:** 
@@ -128,7 +93,7 @@ Returns an ability given a name.
   ```
 ---
 
-## <a name="extended-sentinel-getabilities"></a>getAbilities()
+## getAbilities()
 Gets the assigned abilities of the current logged-in user. This does not include abilities through roles.
 
 * **Type:** 
@@ -146,7 +111,7 @@ Gets the assigned abilities of the current logged-in user. This does not include
   ```
 ---
 
-## <a name="extended-sentinel-getallowedabilities"></a>getAllowedAbilities()
+## getAllowedAbilities()
 Gets the assigned allowed abilities of the current logged-in user. This does not include abilities through roles.
 
 * **Type:** 
@@ -164,7 +129,7 @@ Gets the assigned allowed abilities of the current logged-in user. This does not
   ```
 ---
 
-## <a name="extended-sentinel-getrejectedabilities"></a>getRejectedAbilities()
+## getRejectedAbilities()
 Gets the assigned rejected abilities of the current logged-in user. This does not include abilities through roles.
 
 * **Type:** 
@@ -182,7 +147,7 @@ Gets the assigned rejected abilities of the current logged-in user. This does no
   ```
 ---
 
-## <a name="extended-sentinel-getallabilities"></a>getAllAbilities()
+## getAllAbilities()
 Gets the directly and indirectly assigned abilities of the current logged-in user. This includes abilities through roles.
 
 * **Type:** 
@@ -200,7 +165,7 @@ Gets the directly and indirectly assigned abilities of the current logged-in use
   ```
 ---
 
-## <a name="extended-sentinel-getallallowedabilities"></a>getAllAllowedAbilities()
+## getAllAllowedAbilities()
 Gets the directly and indirectly assigned allowed abilities of the current logged-in user. This includes abilities through roles.
 
 * **Type:** 
@@ -218,7 +183,7 @@ Gets the directly and indirectly assigned allowed abilities of the current logge
   ```
 ---
 
-## <a name="extended-sentinel-getallrejectedabilities"></a>getAllRejectedAbilities()
+## getAllRejectedAbilities()
 Gets the directly and indirectly assigned rejected abilities of the current logged-in user. This includes abilities through roles.
 
 * **Type:** 
@@ -236,9 +201,9 @@ Gets the directly and indirectly assigned rejected abilities of the current logg
   ```
 ---
 
-# <a name="extended-user"></a>\Deltoss\SentinelDatabasePermissions\Users\ExtendedUser
+# \Deltoss\SentinelDatabasePermissions\Users\ExtendedUser
 ---
-## <a name="extended-user-abilities"></a>abilities()
+## abilities()
 The associated abilities that the user has, regardless whether the permission was denied/allowed.
 
 * **Type:** 
@@ -259,7 +224,7 @@ The associated abilities that the user has, regardless whether the permission wa
   ```
 ---
 
-## <a name="extended-user-getabilities"></a>getAbilities()
+## getAbilities()
 The associated abilities that the user has, regardless whether the permission was denied/allowed. This does not include abilities through roles.
 
 * **Type:** 
@@ -278,7 +243,7 @@ The associated abilities that the user has, regardless whether the permission wa
   ```
 ---
 
-## <a name="extended-user-getallowedabilities"></a>getAllowedAbilities()
+## getAllowedAbilities()
 The allowed abilities that the user has. This does not include abilities through roles.
 
 * **Type:** 
@@ -297,7 +262,7 @@ The allowed abilities that the user has. This does not include abilities through
   ```
 ---
 
-## <a name="extended-user-getrejectedabilities"></a>getRejectedAbilities()
+## getRejectedAbilities()
 The rejected abilities that the user has. This does not include abilities through roles.
 
 * **Type:** 
@@ -316,7 +281,7 @@ The rejected abilities that the user has. This does not include abilities throug
   ```
 ---
 
-## <a name="extended-user-getallabilities"></a>getAllAbilities()
+## getAllAbilities()
 Get all abilities for the user. This includes abilities through roles.
 
 * **Type:** 
@@ -335,7 +300,7 @@ Get all abilities for the user. This includes abilities through roles.
   ```
 ---
 
-## <a name="extended-user-getallallowedabilities"></a>getAllAllowedAbilities()
+## getAllAllowedAbilities()
 The allowed abilities that the user has. This includes abilities through roles.
 
 * **Type:** 
@@ -354,7 +319,7 @@ The allowed abilities that the user has. This includes abilities through roles.
   ```
 ---
 
-## <a name="extended-user-getallrejectedabilities"></a>getAllRejectedAbilities()
+## getAllRejectedAbilities()
 The allowed abilities that the user has. This includes abilities through roles.
 
 * **Type:** 
@@ -373,9 +338,9 @@ The allowed abilities that the user has. This includes abilities through roles.
   ```
 ---
 
-# <a name="extended-role"></a>\Deltoss\SentinelDatabasePermissions\Roles\ExtendedRole
+# \Deltoss\SentinelDatabasePermissions\Roles\ExtendedRole
 ---
-## <a name="extended-role-abilities"></a>abilities()
+## abilities()
 The associated abilities that the role has, regardless whether the permission was denied/allowed.
 
 * **Type:** 
@@ -396,7 +361,7 @@ The associated abilities that the role has, regardless whether the permission wa
   ```
 ---
 
-## <a name="extended-role-getabilities"></a>getAbilities()
+## getAbilities()
 The associated abilities that the role has, regardless whether the permission was denied/allowed.
 
 * **Type:** 
@@ -415,7 +380,7 @@ The associated abilities that the role has, regardless whether the permission wa
   ```
 ---
 
-# <a name="eloquent-ability"></a>\Deltoss\SentinelDatabasePermissions\Abilities\EloquentAbility
+# \Deltoss\SentinelDatabasePermissions\Abilities\EloquentAbility
 ---
 | Property      | Type          | Description                           |
 | ------------- | ------------- | ------------------------------------- |
@@ -423,7 +388,7 @@ The associated abilities that the role has, regardless whether the permission wa
 | name          | string        | The displayed name.                   |
 | slug          | string        | A unique slug string.                 |
 ---
-## <a name="eloquent-ability-getabilityid"></a>getAbilityId()
+## getAbilityId()
 Returns the ability's primary key.
 * **Type:** 
   `instance`
@@ -441,7 +406,7 @@ Returns the ability's primary key.
   ```
 ---
 
-## <a name="eloquent-ability-getabilityslug"></a>getAbilitySlug()
+## getAbilitySlug()
 Returns the ability's slug.
 * **Type:** 
   `instance`
@@ -459,7 +424,7 @@ Returns the ability's slug.
   ```
 ---
 
-## <a name="eloquent-ability-getabilitycategory"></a>getAbilityCategory()
+## getAbilityCategory()
 Returns the ability's category.
 * **Type:** 
   `instance`
@@ -477,7 +442,7 @@ Returns the ability's category.
   ```
 ---
 
-## <a name="eloquent-ability-getroles"></a>getRoles()
+## getRoles()
 Returns all roles for the ability.
 * **Type:** 
   `instance`
@@ -495,7 +460,7 @@ Returns all roles for the ability.
   ```
 ---
 
-## <a name="eloquent-ability-getusers"></a>getUsers()
+## getUsers()
 Returns all directly associated users for the ability.
 * **Type:** 
   `instance`
@@ -513,7 +478,7 @@ Returns all directly associated users for the ability.
   ```
 ---
 
-## <a name="eloquent-ability-getallusers"></a>getAllUsers()
+## getAllUsers()
 Returns all directly and indirectly (e.g. via roles) associated users for the ability.
 * **Type:** 
   `instance`
@@ -531,7 +496,7 @@ Returns all directly and indirectly (e.g. via roles) associated users for the ab
   ```
 ---
 
-## <a name="eloquent-ability-getallallowedusers"></a>getAllAllowedUsers()
+## getAllAllowedUsers()
 Returns all directly and indirectly (e.g. via roles) associated users that has allowed access for the ability.
 * **Type:** 
   `instance`
@@ -549,7 +514,7 @@ Returns all directly and indirectly (e.g. via roles) associated users that has a
   ```
 ---
 
-## <a name="eloquent-ability-getallrejectedusers"></a>getAllRejectedUsers()
+## getAllRejectedUsers()
 Returns all directly and indirectly (e.g. via roles) associated users that has rejected access for the ability.
 * **Type:** 
   `instance`
@@ -567,7 +532,7 @@ Returns all directly and indirectly (e.g. via roles) associated users that has r
   ```
 ---
 
-# <a name="eloquent-ability-category"></a>\Deltoss\SentinelDatabasePermissions\AbilityCategories\EloquentAbilityCategory
+# \Deltoss\SentinelDatabasePermissions\AbilityCategories\EloquentAbilityCategory
 ---
 | Property      | Type          | Description                           |
 | ------------- | ------------- | ------------------------------------- |
@@ -575,7 +540,7 @@ Returns all directly and indirectly (e.g. via roles) associated users that has r
 | name          | string        | The displayed name.                   |
 ---
 
-## <a name="eloquent-ability-category-getabilitycategoryid"></a>getAbilityCategoryId()
+## getAbilityCategoryId()
 Returns the ability category's primary key.
 * **Type:** 
   `instance`
@@ -593,7 +558,7 @@ Returns the ability category's primary key.
   ```
 ---
 
-## <a name="eloquent-ability-category-abilities"></a>abilities()
+## abilities()
 The abilities grouped under the ability category.
 
 * **Type:** 
@@ -614,7 +579,7 @@ The abilities grouped under the ability category.
   ```
 ---
 
-## <a name="eloquent-ability-category-getabilities"></a>getAbilities()
+## getAbilities()
 The abilities grouped under the ability category.
 
 * **Type:** 

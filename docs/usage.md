@@ -1,35 +1,10 @@
-# Table of Contents
-- [Managing Permissions](#managing-permissions)
-- [Users](#users)
-  * [Adding Permission](#users-adding-permission)
-  * [Removing Permission](#users-removing-permission)
-  * [Updating Permission](#users-updating-permission)
-  * [Checking for Access](#users-checking-for-access)
-  * [Get Associated Abilities](#users-get-associated-abilities)
-- [Roles](#roles)
-  * [Adding Permission](#roles-adding-permission)
-  * [Removing Permission](#roles-removing-permission)
-  * [Updating Permission](#roles-updating-permission)
-  * [Get Associated Abilities](#roles-get-associated-abilities)
-- [Abilities](#abilities)
-  * [Listing](#abilities-listing)
-  * [Creating](#abilities-creating)
-  * [Editing](#abilities-editing)
-  * [Deleting](#abilities-deleting)
-- [Ability Categories](#ability-categories)
-  * [Listing](#ability-categories-listing)
-  * [Creating](#ability-categories-creating)
-  * [Editing](#ability-categories-editing)
-  * [Deleting](#ability-categories-deleting)
-  * [Changing an Ability's Category](#ability-categories-changing-an-ability-s-category)
-
-# <a name="managing-permissions"></a>Managing Permissions
+# Managing Permissions
 
 Just like with Sentinel, you can use the `addPermission`, `updatePermission`, and `removePermission` method. However, you can pass in a ability **slug**, an **ability** object, or an **ability** ID. Note that you also don't need to call the `save` method to persist the changes to the permission. For more information, see the usage examples with [users](#users) and [roles](#roles).
 
-# <a name="users"></a>Users
+# Users
 
-## <a name="users-adding-permission"></a>Adding Permission
+## Adding Permission
 
 Note before you use any of the below approaches to add a permission, you must already have created the ability in the database. For more information, see (creating abilities)[#abilities-creating].
 
@@ -55,7 +30,7 @@ $user = Sentinel::findUserById(1);
 $user->addPermission('viewroles', true);
 ```
 
-## <a name="users-removing-permission"></a>Removing Permission
+## Removing Permission
 
 Code example removing permission using an ability ID:
 ```php
@@ -76,7 +51,7 @@ $user = Sentinel::findUserById(1);
 $user->removePermission('viewroles');
 ```
 
-## <a name="users-updating-permission"></a>Updating Permission
+## Updating Permission
 
 Code example updating permission using an ability ID:
 ```php
@@ -104,7 +79,7 @@ $user->updatePermission('viewroles', false, true);
 ```
 
 
-## <a name="users-checking-for-access"></a>Checking for Access
+## Checking for Access
 Like Sentinel, you can use `hasAccess` and `hasAnyAccess` as below:
 
 Code example for checking access with logged-in user:
@@ -143,7 +118,7 @@ if ($user->hasAnyAccess('viewroles', 'editroles'))
 }
 ```
 
-## <a name="users-get-associated-abilities"></a>Get Associated Abilities
+## Get Associated Abilities
 There are various methods you can use to access the list of associated abilities.
 Here is a short list of the differences between the various methods:
 
@@ -181,9 +156,9 @@ foreach ($abilities as $ability)
 }
 ```
 
-# <a name="roles"></a>Roles
+# Roles
 
-## <a name="roles-adding-permission"></a>Adding Permission
+## Adding Permission
 
 Note before you use any of the below approaches to add a permission, you must already have created the ability in the database. For more information, see (creating abilities)[#abilities-creating].
 
@@ -210,7 +185,7 @@ $role = Sentinel::findRoleById(1);
 $role->addPermission('viewroles', true);
 ```
 
-## <a name="roles-removing-permission"></a>Removing Permission
+## Removing Permission
 
 Code example removing permission using an ability ID:
 ```php
@@ -231,7 +206,7 @@ $role = Sentinel::findRoleById(1);
 $role->removePermission('viewroles');
 ```
 
-## <a name="roles-updating-permission"></a>Updating Permission
+## Updating Permission
 
 Code example updating permission using an ability ID:
 ```php
@@ -259,7 +234,7 @@ $role = Sentinel::findRoleById(1);
 $role->updatePermission('viewroles', false, true);
 ```
 
-## <a name="roles-get-associated-abilities"></a>Get Associated Abilities
+## Get Associated Abilities
 
 Roles, unlike users, can't have indirect permissions, and as such has fewer methods of retrieving associated abilities.
 
@@ -282,16 +257,16 @@ foreach ($abilities as $ability)
 }
 ```
 
-# <a name="abilities"></a>Abilities
+# Abilities
 
-## <a name="abilities-listing"></a>Listing
+## Listing
 
 Code example:
 ```php
 $abilities = Sentinel::getAbilityRepository()->orderBy('name', 'ASC')->get();
 ```
 
-## <a name="abilities-creating"></a>Creating
+## Creating
 
 Code example:
 ```php
@@ -312,7 +287,7 @@ $ability->ability_category_id = $abilityCategory->id;
 $ability->save();
 ```
 
-## <a name="abilities-editing"></a>Editing
+## Editing
 
 Code example:
 ```php
@@ -327,7 +302,7 @@ $ability->name = 'View Groups';
 $ability->save();
 ```
 
-## <a name="abilities-deleting"></a>Deleting
+## Deleting
 
 Code example:
 ```php
@@ -335,16 +310,16 @@ $ability = Sentinel::findAbilityBySlug('viewroles');
 $ability->delete();
 ```
 
-# <a name="ability-categories"></a>Ability Categories
+# Ability Categories
 
-## <a name="ability-categories-listing"></a>Listing
+## Listing
 
 Code example:
 ```php
 $abilityCategories = Sentinel::getAbilityCategoryRepository()->orderBy('name', 'ASC')->get();
 ```
 
-## <a name="ability-categories-creating"></a>Creating
+## Creating
 
 Code example:
 ```php
@@ -353,7 +328,7 @@ $abilityCategory->name = 'Roles';
 $abilityCategory->save();
 ```
 
-## <a name="ability-categories-editing"></a>Editing
+## Editing
 
 Code example:
 ```php
@@ -366,7 +341,7 @@ $abilityCategory->name = 'Groups';
 $abilityCategory->save();
 ```
 
-## <a name="ability-categories-deleting"></a>Deleting
+## Deleting
 
 Code example:
 ```php
@@ -374,7 +349,7 @@ $abilityCategory = Sentinel::findAbilityCategoryByName('Roles');
 $abilityCategory->delete();
 ```
 
-## <a name="ability-categories-changing-an-ability-s-category"></a>Changing an Ability's Category
+## Changing an Ability's Category
 ```php
 $abilityCategory = Sentinel::findAbilityCategoryByName('Groups');
 
