@@ -1,4 +1,6 @@
 [![CircleCI](https://circleci.com/gh/deltoss/sentinel-database-permissions.svg?style=svg)](https://circleci.com/gh/deltoss/sentinel-database-permissions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![made-with-docsify](https://img.shields.io/badge/Made%20with-Docsify-green.svg)](https://shields.io/)
 
 # Introduction
 A [Laravel](https://github.com/laravel/laravel) package that configures Sentinel to use database permissions. [Cartalyst Sentinel](https://cartalyst.com/manual/sentinel/2.0) already has permissions, however their permissions are JSON values stored under the user or role record.

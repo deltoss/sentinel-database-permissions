@@ -15,4 +15,4 @@ This package integrates with Sentinel and add its own set of methods. This means
 * php 7.1.3+
 
 # Documentation
-For more documentation, refer to the repo's [GitHub pages]()
+For more documentation, refer to the repo's [GitHub pages](https://deltoss.github.io/sentinel-database-permissions/)
