@@ -3,6 +3,7 @@
 [![made-with-docsify](https://img.shields.io/badge/Made%20with-Docsify-green.svg)](https://docsify.js.org/)
 
 # Introduction
+
 A [Laravel](https://github.com/laravel/laravel) package that configures Sentinel to use database permissions. [Cartalyst Sentinel](https://cartalyst.com/manual/sentinel/2.0) already has permissions, however their permissions are JSON values stored under the user or role record.
 
 Some would prefer permissions to be a database table, to perform certain operations more efficiently when it comes to permissions. For example lets say we want to get a list of all permissions in the database.
@@ -12,6 +13,7 @@ In Cartalyst Sentinel, to get all permissions, you'd need to iterate through __a
 This package integrates with Sentinel and add its own set of methods. This means for the most part, you can use the Sentinel's API as per normal. The only caveat is before adding permissions, you'll need to create the `ability` on the database beforehand.
 
 # Requirements
+
 * Laravel Framework 5.5+
 * Cartalyst Sentinel 2.0+
 * php 7.1.3+
@@ -19,9 +21,11 @@ This package integrates with Sentinel and add its own set of methods. This means
 # Concepts
 
 ## Abilities
+
 **Abilities** defines the list of actions that can be done for your system. For example, "View Roles", "Edit Roles" would be a set of abilities.
 
 ## Permissions
+
 **Permissions** defines the relationship between the permissable entity (roles or users) and the abilities, whether the permissable entity is allowed/denied access to perform an ability.
 
 For example, given we have user A, we assign user A to have the ability of "View Roles" with "allow" access, and then we assign user A to have the ability of "Edit Roles" with "denied" access. By doing this, we can say user A has permissions to view roles, but has explicitly denied permissions to edit roles.
@@ -45,6 +49,7 @@ foreach ($abilities as $ability)
 Note if you a checking whether a user has a permission to do an action (i.e. ability), it's more reliable and easier to use the Sentinel `hasAccess` or `hasAnyAccess` method.
 
 ## Ability Categories
+
 **Ability categories** is just an optional grouping construct for abilities. For the process of authorisation, it's not relevant. It's there so when you display a list of permissions, e.g for a particular user, you can render them in groups.
 
 
@@ -136,6 +141,7 @@ role_permissions }o--o| abilities
 ```
 
 # Quick Start with New Laravel App
+
 **Install the package using composer**
 
 ```bash
@@ -207,6 +213,7 @@ $ php artisan vendor:publish --provider='Deltoss\SentinelDatabasePermissions\Pro
 ```
 
 ## Migrations
+
 It's optional to publish the migrations. Even without publishing the migration files, when you use `php artisan migrate`, it'll automatically call the migrations for Sentinel Database Permissions.
 
 You should only publish them if you need to modify them. However, generally it's a better idea to make your own additional migration files to make modifications to **Sentinel** or **Sentinel Database Permissions**.

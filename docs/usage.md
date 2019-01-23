@@ -80,6 +80,7 @@ $user->updatePermission('viewroles', false, true);
 
 
 ## Checking for Access
+
 Like Sentinel, you can use `hasAccess` and `hasAnyAccess` as below:
 
 Code example for checking access with logged-in user:
@@ -119,6 +120,7 @@ if ($user->hasAnyAccess('viewroles', 'editroles'))
 ```
 
 ## Get Associated Abilities
+
 There are various methods you can use to access the list of associated abilities.
 Here is a short list of the differences between the various methods:
 

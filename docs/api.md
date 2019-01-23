@@ -1,9 +1,13 @@
 # Notes
+
 The below documentation only includes additional methods introduced by the package, and does not include core methods which Sentinel already has.
 
 # \Deltoss\SentinelDatabasePermissions\ExtendedSentinel
+
 ---
+
 ## findAbilityById($id)
+
 Returns an ability given an id.
 
 * **Type:** 
@@ -22,6 +26,7 @@ Returns an ability given an id.
 ---
 
 ## findAbilityBySlug($slug)
+
 Returns an ability given a slug.
 
 * **Type:** 
@@ -40,6 +45,7 @@ Returns an ability given a slug.
 ---
 
 ## findAbilityByName($name)
+
 Returns an ability given a name.
 
 * **Type:** 
@@ -58,6 +64,7 @@ Returns an ability given a name.
 ---
 
 ## findAbilityCategoryById($id)
+
 Returns an ability category given an id.
 
 * **Type:** 
@@ -76,6 +83,7 @@ Returns an ability category given an id.
 ---
 
 ## findAbilityCategoryByName($name)
+
 Returns an ability given a name.
 
 * **Type:** 
@@ -94,6 +102,7 @@ Returns an ability given a name.
 ---
 
 ## getAbilities()
+
 Gets the assigned abilities of the current logged-in user. This does not include abilities through roles.
 
 * **Type:** 
@@ -112,6 +121,7 @@ Gets the assigned abilities of the current logged-in user. This does not include
 ---
 
 ## getAllowedAbilities()
+
 Gets the assigned allowed abilities of the current logged-in user. This does not include abilities through roles.
 
 * **Type:** 
@@ -130,6 +140,7 @@ Gets the assigned allowed abilities of the current logged-in user. This does not
 ---
 
 ## getRejectedAbilities()
+
 Gets the assigned rejected abilities of the current logged-in user. This does not include abilities through roles.
 
 * **Type:** 
@@ -148,6 +159,7 @@ Gets the assigned rejected abilities of the current logged-in user. This does no
 ---
 
 ## getAllAbilities()
+
 Gets the directly and indirectly assigned abilities of the current logged-in user. This includes abilities through roles.
 
 * **Type:** 
@@ -166,6 +178,7 @@ Gets the directly and indirectly assigned abilities of the current logged-in use
 ---
 
 ## getAllAllowedAbilities()
+
 Gets the directly and indirectly assigned allowed abilities of the current logged-in user. This includes abilities through roles.
 
 * **Type:** 
@@ -184,6 +197,7 @@ Gets the directly and indirectly assigned allowed abilities of the current logge
 ---
 
 ## getAllRejectedAbilities()
+
 Gets the directly and indirectly assigned rejected abilities of the current logged-in user. This includes abilities through roles.
 
 * **Type:** 
@@ -202,6 +216,7 @@ Gets the directly and indirectly assigned rejected abilities of the current logg
 ---
 
 # \Deltoss\SentinelDatabasePermissions\Users\ExtendedUser
+
 ---
 ## abilities()
 The associated abilities that the user has, regardless whether the permission was denied/allowed.
@@ -225,6 +240,7 @@ The associated abilities that the user has, regardless whether the permission wa
 ---
 
 ## getAbilities()
+
 The associated abilities that the user has, regardless whether the permission was denied/allowed. This does not include abilities through roles.
 
 * **Type:** 
@@ -244,6 +260,7 @@ The associated abilities that the user has, regardless whether the permission wa
 ---
 
 ## getAllowedAbilities()
+
 The allowed abilities that the user has. This does not include abilities through roles.
 
 * **Type:** 
@@ -263,6 +280,7 @@ The allowed abilities that the user has. This does not include abilities through
 ---
 
 ## getRejectedAbilities()
+
 The rejected abilities that the user has. This does not include abilities through roles.
 
 * **Type:** 
@@ -282,6 +300,7 @@ The rejected abilities that the user has. This does not include abilities throug
 ---
 
 ## getAllAbilities()
+
 Get all abilities for the user. This includes abilities through roles.
 
 * **Type:** 
@@ -301,6 +320,7 @@ Get all abilities for the user. This includes abilities through roles.
 ---
 
 ## getAllAllowedAbilities()
+
 The allowed abilities that the user has. This includes abilities through roles.
 
 * **Type:** 
@@ -320,6 +340,7 @@ The allowed abilities that the user has. This includes abilities through roles.
 ---
 
 ## getAllRejectedAbilities()
+
 The allowed abilities that the user has. This includes abilities through roles.
 
 * **Type:** 
@@ -339,6 +360,7 @@ The allowed abilities that the user has. This includes abilities through roles.
 ---
 
 # \Deltoss\SentinelDatabasePermissions\Roles\ExtendedRole
+
 ---
 ## abilities()
 The associated abilities that the role has, regardless whether the permission was denied/allowed.
@@ -362,6 +384,7 @@ The associated abilities that the role has, regardless whether the permission wa
 ---
 
 ## getAbilities()
+
 The associated abilities that the role has, regardless whether the permission was denied/allowed.
 
 * **Type:** 
@@ -381,6 +404,7 @@ The associated abilities that the role has, regardless whether the permission wa
 ---
 
 # \Deltoss\SentinelDatabasePermissions\Abilities\EloquentAbility
+
 ---
 
 | Property      | Type          | Description                           |
@@ -391,6 +415,7 @@ The associated abilities that the role has, regardless whether the permission wa
 
 ---
 ## getAbilityId()
+
 Returns the ability's primary key.
 * **Type:** 
   `instance`
@@ -409,6 +434,7 @@ Returns the ability's primary key.
 ---
 
 ## getAbilitySlug()
+
 Returns the ability's slug.
 * **Type:** 
   `instance`
@@ -427,6 +453,7 @@ Returns the ability's slug.
 ---
 
 ## getAbilityCategory()
+
 Returns the ability's category.
 * **Type:** 
   `instance`
@@ -445,6 +472,7 @@ Returns the ability's category.
 ---
 
 ## getRoles()
+
 Returns all roles for the ability.
 * **Type:** 
   `instance`
@@ -463,6 +491,7 @@ Returns all roles for the ability.
 ---
 
 ## getUsers()
+
 Returns all directly associated users for the ability.
 * **Type:** 
   `instance`
@@ -481,6 +510,7 @@ Returns all directly associated users for the ability.
 ---
 
 ## getAllUsers()
+
 Returns all directly and indirectly (e.g. via roles) associated users for the ability.
 * **Type:** 
   `instance`
@@ -499,6 +529,7 @@ Returns all directly and indirectly (e.g. via roles) associated users for the ab
 ---
 
 ## getAllAllowedUsers()
+
 Returns all directly and indirectly (e.g. via roles) associated users that has allowed access for the ability.
 * **Type:** 
   `instance`
@@ -517,6 +548,7 @@ Returns all directly and indirectly (e.g. via roles) associated users that has a
 ---
 
 ## getAllRejectedUsers()
+
 Returns all directly and indirectly (e.g. via roles) associated users that has rejected access for the ability.
 * **Type:** 
   `instance`
@@ -535,6 +567,7 @@ Returns all directly and indirectly (e.g. via roles) associated users that has r
 ---
 
 # \Deltoss\SentinelDatabasePermissions\AbilityCategories\EloquentAbilityCategory
+
 ---
 
 | Property      | Type          | Description                           |
@@ -545,6 +578,7 @@ Returns all directly and indirectly (e.g. via roles) associated users that has r
 ---
 
 ## getAbilityCategoryId()
+
 Returns the ability category's primary key.
 * **Type:** 
   `instance`
@@ -563,6 +597,7 @@ Returns the ability category's primary key.
 ---
 
 ## abilities()
+
 The abilities grouped under the ability category.
 
 * **Type:** 
@@ -584,6 +619,7 @@ The abilities grouped under the ability category.
 ---
 
 ## getAbilities()
+
 The abilities grouped under the ability category.
 
 * **Type:** 
