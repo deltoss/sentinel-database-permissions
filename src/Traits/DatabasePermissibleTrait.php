@@ -95,7 +95,7 @@ trait DatabasePermissibleTrait
     /**
      * {@inheritDoc}
      */
-    public function addPermission($ability, $value = true)
+    public function addPermission(string $ability, bool $value = true) : Cartalyst\Sentinel\Permissions\PermissibleInterface
     {
         $abilityObject = $this->getAbility($ability);
         
@@ -109,7 +109,7 @@ trait DatabasePermissibleTrait
     /**
      * {@inheritDoc}
      */
-    public function updatePermission($ability, $value = true, $create = false)
+    public function updatePermission($ability, $value = true, $create = false) : Cartalyst\Sentinel\Permissions\PermissibleInterface
     {
         $abilityObject = $this->getAbility($ability);
 
@@ -134,7 +134,7 @@ trait DatabasePermissibleTrait
     /**
      * {@inheritDoc}
      */
-    public function removePermission($ability)
+    public function removePermission($ability) : Cartalyst\Sentinel\Permissions\PermissibleInterface
     {
         $abilityObject = $this->getAbility($ability);
         $index = $this->getAbilities()->search(function ($item, $key) use ($abilityObject) {
