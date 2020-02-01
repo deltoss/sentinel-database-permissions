@@ -4,6 +4,7 @@ namespace Deltoss\SentinelDatabasePermissions\Traits;
 
 use Mockery\Exception\BadMethodCallException;
 use Deltoss\SentinelDatabasePermissions\Abilities\AbilityInterface;
+use \Cartalyst\Sentinel\Permissions\PermissibleInterface;
 use Exception;
 
 /**
@@ -95,7 +96,7 @@ trait DatabasePermissibleTrait
     /**
      * {@inheritDoc}
      */
-    public function addPermission(string $ability, bool $value = true) : Cartalyst\Sentinel\Permissions\PermissibleInterface
+    public function addPermission(string $ability, bool $value = true) : PermissibleInterface
     {
         $abilityObject = $this->getAbility($ability);
         
@@ -109,7 +110,7 @@ trait DatabasePermissibleTrait
     /**
      * {@inheritDoc}
      */
-    public function updatePermission($ability, $value = true, $create = false) : Cartalyst\Sentinel\Permissions\PermissibleInterface
+    public function updatePermission($ability, $value = true, $create = false) : PermissibleInterface
     {
         $abilityObject = $this->getAbility($ability);
 
@@ -134,7 +135,7 @@ trait DatabasePermissibleTrait
     /**
      * {@inheritDoc}
      */
-    public function removePermission($ability) : Cartalyst\Sentinel\Permissions\PermissibleInterface
+    public function removePermission($ability) : PermissibleInterface
     {
         $abilityObject = $this->getAbility($ability);
         $index = $this->getAbilities()->search(function ($item, $key) use ($abilityObject) {
