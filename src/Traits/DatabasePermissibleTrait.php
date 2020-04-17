@@ -156,7 +156,15 @@ trait DatabasePermissibleTrait
     {
         if (!($ability instanceof AbilityInterface))
         {
-            $ability = static::getAbilitiesModel()::where('id', $ability)->orWhere('slug', $ability)->first();
+            $ability = static::getAbilitiesModel()::when(
+                \is_numeric($ability), 
+                function($query) use ($ability) {
+                    $query->where('id', $ability);
+                }, 
+                function($query) use ($ability) {
+                    $query->where('slug', $ability);
+                }
+            )->first();
         }
         return $ability;
     }
