@@ -4,6 +4,7 @@ namespace Deltoss\SentinelDatabasePermissions\Traits;
 
 use Mockery\Exception\BadMethodCallException;
 use Deltoss\SentinelDatabasePermissions\Abilities\AbilityInterface;
+use \Cartalyst\Sentinel\Permissions\PermissibleInterface;
 use Exception;
 
 /**
@@ -95,7 +96,7 @@ trait DatabasePermissibleTrait
     /**
      * {@inheritDoc}
      */
-    public function addPermission($ability, $value = true)
+    public function addPermission(string $ability, bool $value = true) : PermissibleInterface
     {
         $abilityObject = $this->getAbility($ability);
         
@@ -109,7 +110,7 @@ trait DatabasePermissibleTrait
     /**
      * {@inheritDoc}
      */
-    public function updatePermission($ability, $value = true, $create = false)
+    public function updatePermission($ability, $value = true, $create = false) : PermissibleInterface
     {
         $abilityObject = $this->getAbility($ability);
 
@@ -134,7 +135,7 @@ trait DatabasePermissibleTrait
     /**
      * {@inheritDoc}
      */
-    public function removePermission($ability)
+    public function removePermission($ability) : PermissibleInterface
     {
         $abilityObject = $this->getAbility($ability);
         $index = $this->getAbilities()->search(function ($item, $key) use ($abilityObject) {
@@ -155,7 +156,15 @@ trait DatabasePermissibleTrait
     {
         if (!($ability instanceof AbilityInterface))
         {
-            $ability = static::getAbilitiesModel()::where('id', $ability)->orWhere('slug', $ability)->first();
+            $ability = static::getAbilitiesModel()::when(
+                \is_numeric($ability), 
+                function($query) use ($ability) {
+                    $query->where('id', $ability);
+                }, 
+                function($query) use ($ability) {
+                    $query->where('slug', $ability);
+                }
+            )->first();
         }
         return $ability;
     }

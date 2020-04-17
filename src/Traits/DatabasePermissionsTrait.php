@@ -17,7 +17,7 @@ trait DatabasePermissionsTrait
      * @param string $permission
      * @return bool
      */
-    protected function checkPermission(array $prepared, $permission)
+    protected function checkPermission(array $prepared, $permission) : bool
     {
         // With sentinel StandardPermissions, it
         // add user permissions to the END of the array,
@@ -53,7 +53,7 @@ trait DatabasePermissionsTrait
      * @param array $permissions
      * @return void
      */
-    protected function preparePermissions(array &$prepared, array $permissions)
+    protected function preparePermissions(array &$prepared, array $permissions) : void
     {
         foreach ($permissions as $permission) {
             // Find the permission if it already exists
