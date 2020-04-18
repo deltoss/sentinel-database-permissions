@@ -2,8 +2,6 @@
 
 namespace Deltoss\SentinelDatabasePermissions\Traits;
 
-use Mockery\Exception\BadMethodCallException;
-use Deltoss\SentinelDatabasePermissions\Abilities\AbilityInterface;
 use \Cartalyst\Sentinel\Permissions\PermissibleInterface;
 use Exception;
 
@@ -33,7 +31,6 @@ trait DatabasePermissibleTrait
         // the default sentinel's 'permission' column,
         // which should be removed
         
-        // all() turns the collection object to an array of items
         $abilities = $this->getAbilities()->all();
         return $abilities;
     }
@@ -110,9 +107,9 @@ trait DatabasePermissibleTrait
     /**
      * {@inheritDoc}
      */
-    public function updatePermission($ability, $value = true, $create = false) : PermissibleInterface
+    public function updatePermission(string $permission, bool $value = true, bool $create = false) : PermissibleInterface
     {
-        $abilityObject = $this->getAbility($ability);
+        $abilityObject = $this->getAbility($permission);
 
         if ($this->getAbilities()->contains($abilityObject->getAbilityId()))
         {
@@ -135,7 +132,7 @@ trait DatabasePermissibleTrait
     /**
      * {@inheritDoc}
      */
-    public function removePermission($ability) : PermissibleInterface
+    public function removePermission(string $ability) : PermissibleInterface
     {
         $abilityObject = $this->getAbility($ability);
         $index = $this->getAbilities()->search(function ($item, $key) use ($abilityObject) {
@@ -152,20 +149,16 @@ trait DatabasePermissibleTrait
         return $this;
     }
 
-    protected function getAbility($ability)
+    protected function getAbility(string $ability)
     {
-        if (!($ability instanceof AbilityInterface))
-        {
-            $ability = static::getAbilitiesModel()::when(
-                \is_numeric($ability), 
-                function($query) use ($ability) {
-                    $query->where('id', $ability);
-                }, 
-                function($query) use ($ability) {
-                    $query->where('slug', $ability);
-                }
-            )->first();
-        }
-        return $ability;
+        return static::getAbilitiesModel()::when(
+            \is_numeric($ability), 
+            function($query) use ($ability) {
+                $query->where('id', $ability);
+            }, 
+            function($query) use ($ability) {
+                $query->where('slug', $ability);
+            }
+        )->first();
     }
 }

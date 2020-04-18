@@ -12,7 +12,7 @@ class UserPermissibleTraitTest extends DatabaseTestCase
         $abilityCategory = $this->createAbilityCategory();
         [$createUserAbility, $viewUserAbility, $updateUserAbility, $deleteUserAbility] = $this->createAbilities($abilityCategory);
 
-        $user->addPermission($createUserAbility, true);
+        $user->addPermission($createUserAbility->slug, true);
         $user->addPermission($viewUserAbility->id, true);
         $user->addPermission('updateusers', true);
         $user->addPermission('deleteusers', false);
@@ -45,8 +45,8 @@ class UserPermissibleTraitTest extends DatabaseTestCase
         $abilityCategory = $this->createAbilityCategory();
         [$createUserAbility] = $this->createAbilities($abilityCategory);
 
-        $user->addPermission($createUserAbility, true);
-        $user->updatePermission($createUserAbility, false);
+        $user->addPermission($createUserAbility->slug, true);
+        $user->updatePermission($createUserAbility->slug, false);
 
         $this->assertFalse($user->hasAccess('createusers'));
     }
@@ -57,12 +57,12 @@ class UserPermissibleTraitTest extends DatabaseTestCase
         $abilityCategory = $this->createAbilityCategory();
         [$createUserAbility, $viewUserAbility, $updateUserAbility, $deleteUserAbility] = $this->createAbilities($abilityCategory);
 
-        $user->addPermission($createUserAbility, true);
-        $user->addPermission($viewUserAbility, true);
-        $user->addPermission($updateUserAbility, true);
-        $user->addPermission($deleteUserAbility, true);
+        $user->addPermission($createUserAbility->id, true);
+        $user->addPermission($viewUserAbility->slug, true);
+        $user->addPermission($updateUserAbility->slug, true);
+        $user->addPermission($deleteUserAbility->slug, true);
 
-        $user->removePermission($createUserAbility);
+        $user->removePermission($createUserAbility->id);
         $user->removePermission($viewUserAbility->id);
         $user->removePermission('updateusers');
         $user->removePermission('deleteusers');
